@@ -6,6 +6,9 @@
         %p= link_to "Sign in with OAuth 2 provider", user_omniauth_authorize_path(:doorkeeper), :class => "btn primary"
       - else
         %h2 Explore the api
+        %pre 
+          = current_user.inspect
+          
         .well
           = link_to "My Credentials", explore_api_path(:me, :format => :json), :class => "btn", "data-explore" => []
           = link_to "Profiles", explore_api_path(:profiles, :format => :json), :class => "btn", "data-explore" => []
