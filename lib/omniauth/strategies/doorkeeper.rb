@@ -4,9 +4,13 @@ module OmniAuth
       option :name, :doorkeeper
 
       option :client_options, {
-        :site => "http://localhost:4000",
-        :authorize_path => "/oauth/authorize"
+        :authorize_path => "/oauth/authorize",
+        :darby => 'likes_cake'
       }
+
+      option :authorize_params, {:darby => 'foobar'}
+
+      option(:scope, 'public rule_world manage_businesses')
 
       uid do
         raw_info["id"]
@@ -14,12 +18,13 @@ module OmniAuth
 
       info do
         {
-          :email => raw_info["email"]
+          :email => raw_info["email"],
+          :name => raw_info["name"]
         }
       end
 
       def raw_info
-        @raw_info ||= access_token.get('/api/v1/me.json').parsed
+        @raw_info ||= access_token.get('/users/me.json').parsed
       end
     end
   end

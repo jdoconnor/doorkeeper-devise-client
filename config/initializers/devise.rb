@@ -197,8 +197,13 @@ Devise.setup do |config|
   # ==> OmniAuth
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
-  config.omniauth :doorkeeper,  DOORKEEPER_APP_ID, DOORKEEPER_APP_SECRET, :client_options =>  {:site => DOORKEEPER_APP_URL}
-
+  config.omniauth(
+    :doorkeeper,
+    ENV['DOORKEEPER_APP_ID'],
+    ENV['DOORKEEPER_APP_SECRET'], 
+    :client_options =>  {:site => ENV['DOORKEEPER_APP_URL']}
+  )
+  
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
   # change the failure app, you can configure them inside the config.warden block.
